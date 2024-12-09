@@ -1,0 +1,58 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class CinemaTicketBooking {
+private:
+    string movieNames[3] = {"Movie A", "Movie B", "Movie C"};
+    int ticketPrice = 10;
+    int seatsAvailable[3] = {100, 100, 100};
+public:
+    void showMovies() {
+        cout << "Available Movies:\n";
+        for (int i = 0; i < 3; i++) {
+            cout << i + 1 << ". " << movieNames[i] << " (Seats Available: " << seatsAvailable[i] << ")\n";
+        }
+    }
+
+    bool bookTickets(int movieChoice, int numTickets) {
+        if (movieChoice < 1 || movieChoice > 3) {
+            cout << "Invalid movie selection.\n";
+            return false;
+        }
+        if (numTickets > seatsAvailable[movieChoice - 1]) {
+            cout << "Sorry, not enough seats available.\n";
+            return false;
+        }
+
+        seatsAvailable[movieChoice - 1] -= numTickets;
+        cout << "Booking successful! Total cost: $" << numTickets * ticketPrice << "\n";
+        cout << "Seats remaining for " << movieNames[movieChoice - 1] << ": " << seatsAvailable[movieChoice - 1] << "\n";
+        return true;
+    }
+
+    void displayMenu() {
+        int movieChoice, numTickets;
+        while (true) {
+            showMovies();
+            cout << "\nEnter the movie number you want to book tickets for (1-3), or 0 to exit: ";
+            cin >> movieChoice;
+            if (movieChoice == 0) {
+                cout << "Thank you for using the Cinema Ticket Booking System!\n";
+                break;
+            }
+            cout << "Enter the number of tickets: ";
+            cin >> numTickets;
+
+            if (!bookTickets(movieChoice, numTickets)) {
+                cout << "Booking failed. Please try again.\n";
+            }
+        }
+    }
+};
+
+int main() {
+    CinemaTicketBooking system;
+    system.displayMenu();
+    return 0;
+}
