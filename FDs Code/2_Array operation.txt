@@ -1,0 +1,55 @@
+
+arr = [1, 2, 3, 4, 5]
+
+arr.append(6)
+print(f"Array after appending 6: {arr}")
+
+
+arr.insert(2, 10)  # Insert 10 at index 2
+print(f"Array after inserting 10 at index 2: {arr}")
+
+
+arr.remove(4)  # Remove first occurrence of 4
+print(f"Array after removing 4: {arr}")
+
+
+removed_element = arr.pop(3)  # Remove the element at index 3 (value 10)
+print(f"Array after popping element at index 3: {arr}")
+print(f"Removed element: {removed_element}")
+
+
+index = arr.index(5)  # Find index of element 5
+print(f"Index of element 5: {index}")
+
+
+count = arr.count(5)  # Count how many times 5 appears in the array
+print(f"Count of element 5: {count}")
+
+
+arr.sort()
+print(f"Array after sorting: {arr}")
+
+
+arr.reverse()
+print(f"Array after reversing: {arr}")
+
+
+sub_array = arr[1:4]  # Get elements from index 1 to 3 (4 is excluded)
+print(f"Sliced sub-array from index 1 to 3: {sub_array}")
+
+
+max_value = max(arr)
+min_value = min(arr)
+print(f"Maximum value in the array: {max_value}")
+print(f"Minimum value in the array: {min_value}")
+
+
+sum_value = sum(arr)
+print(f"Sum of elements in the array: {sum_value}")
+
+
+range_arr = list(range(1, 6))  # Create a list with numbers from 1 to 5
+print(f"Array created using range(1, 6): {range_arr}")
+
+arr.clear()
+print(f"Array after clearing all elements: {arr}")

@@ -1,0 +1,134 @@
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+    
+    Node(int val) : data(val), next(nullptr) {}
+};
+
+class SinglyLinkedList {
+private:
+    Node* head;
+    
+public:
+    SinglyLinkedList() : head(nullptr) {}
+    
+    void insert(int value) {
+        Node* newNode = new Node(value);
+        if (!head) {
+            head = newNode;
+            return;
+        }
+        Node* temp = head;
+        while (temp->next) {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+    }
+    
+    void display() {
+        if (!head) {
+            cout << "The list is empty." << endl;
+            return;
+        }
+        Node* temp = head;
+        while (temp) {
+            cout << temp->data << " ";
+            temp = temp->next;
+        }
+        cout << endl;
+    }
+    
+    bool exists(int value) {
+        Node* temp = head;
+        while (temp) {
+            if (temp->data == value) {
+                return true;
+            }
+            temp = temp->next;
+        }
+        return false;
+    }
+    
+    SinglyLinkedList unionSets(SinglyLinkedList& other) {
+        SinglyLinkedList result;
+        Node* temp = head;
+        
+        while (temp) {
+            result.insert(temp->data);
+            temp = temp->next;
+        }
+        
+        temp = other.head;
+        while (temp) {
+            if (!exists(temp->data)) {
+                result.insert(temp->data);
+            }
+            temp = temp->next;
+        }
+        return result;
+    }
+    
+    SinglyLinkedList intersectionSets(SinglyLinkedList& other) {
+        SinglyLinkedList result;
+        Node* temp = head;
+        
+        while (temp) {
+            if (other.exists(temp->data)) {
+                result.insert(temp->data);
+            }
+            temp = temp->next;
+        }
+        return result;
+    }
+    
+    SinglyLinkedList differenceSets(SinglyLinkedList& other) {
+        SinglyLinkedList result;
+        Node* temp = head;
+        
+        while (temp) {
+            if (!other.exists(temp->data)) {
+                result.insert(temp->data);
+            }
+            temp = temp->next;
+        }
+        return result;
+    }
+};
+
+int main() {
+    SinglyLinkedList set1, set2;
+    
+    set1.insert(1);
+    set1.insert(2);
+    set1.insert(3);
+    set1.insert(4);
+    set1.insert(5);
+    
+    set2.insert(4);
+    set2.insert(5);
+    set2.insert(6);
+    set2.insert(7);
+    
+    cout << "Set 1: ";
+    set1.display();
+    
+    cout << "Set 2: ";
+    set2.display();
+    
+    SinglyLinkedList unionResult = set1.unionSets(set2);
+    cout << "Union of Set 1 and Set 2: ";
+    unionResult.display();
+    
+    SinglyLinkedList intersectionResult = set1.intersectionSets(set2);
+    cout << "Intersection of Set 1 and Set 2: ";
+    intersectionResult.display();
+    
+    SinglyLinkedList differenceResult = set1.differenceSets(set2);
+    cout << "Difference of Set 1 and Set 2 (Set1 - Set2): ";
+    differenceResult.display();
+    
+    return 0;
+}

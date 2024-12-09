@@ -1,0 +1,37 @@
+#include <iostream>
+#include <queue>
+#include <string>
+using namespace std;
+
+struct Job {
+    int jobId;
+    string jobName;
+    int jobDuration;
+};
+
+void processJob(Job job) {
+    cout << "Processing job ID: " << job.jobId << ", Name: " << job.jobName 
+         << " for " << job.jobDuration << " seconds." << endl;
+}
+
+int main() {
+    queue<Job> jobQueue;
+
+    jobQueue.push({1, "Job1", 5});
+    jobQueue.push({2, "Job2", 3});
+    jobQueue.push({3, "Job3", 7});
+    jobQueue.push({4, "Job4", 2});
+
+    cout << "Job Queue Simulation Started..." << endl;
+
+    while (!jobQueue.empty()) {
+        Job currentJob = jobQueue.front();
+        jobQueue.pop();
+        
+        processJob(currentJob);
+    }
+
+    cout << "All jobs processed!" << endl;
+
+    return 0;
+}
